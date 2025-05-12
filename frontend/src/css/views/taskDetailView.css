@@ -1,0 +1,172 @@
+/* 全体のカードスタイル */
+.task-detail-card {
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease;
+}
+
+.task-detail-card.open {
+    background-color: #fef9c3;
+    /* 明るい黄色 */
+}
+
+.task-detail-card.in_progress {
+    background-color: #dbeafe;
+    /* 薄い青 */
+}
+
+.task-detail-card.done {
+    background-color: #dcfce7;
+    /* 薄い緑 */
+}
+
+/* 各フィールドラベル付き段落 */
+.task-detail-card p {
+    margin-bottom: 0.75rem;
+}
+
+/* ステータス選択エリア */
+.task-status-section {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+/* セレクトボックス */
+#task-status-select {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.95rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: #0f172a;
+}
+
+/* 更新ボタン */
+#update-status-button {
+    padding: 0.4rem 0.8rem;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#update-status-button:hover {
+    background-color: #1d4ed8;
+}
+
+/* ヘッダータイトル */
+#title {
+    background-color: #1e293b;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: white;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+#title-text {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    line-height: 1;
+    margin-left: 0.5rem;
+    color: white;
+}
+
+.status-badge.open {
+    background-color: #facc15;
+    /* 黄 */
+    color: #1f2937;
+}
+
+.status-badge.in_progress {
+    background-color: #3b82f6;
+    /* 青 */
+}
+
+.status-badge.done {
+    background-color: #10b981;
+    /* 緑 */
+}
+
+.comment-container {
+    margin-top: 2rem;
+}
+
+#comment-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+}
+
+#comment-list li {
+    margin-bottom: 0.75rem;
+    padding: 0.5rem 1rem;
+    background-color: #f1f5f9;
+    border-radius: 6px;
+    color: #1e293b;
+}
+
+/* コメント送信フォーム（フッター風） */
+.comment-form {
+    position: sticky;
+    bottom: 0;
+    background-color: #ffffff;
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+#comment-input {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+#comment-form button {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 0 1rem;
+    cursor: pointer;
+}
+
+#comment-form button:hover {
+    background-color: #1d4ed8;
+}
+
+/* モバイル対応 */
+@media (max-width: 640px) {
+    .task-detail-card {
+        padding: 1rem;
+        font-size: 0.9rem;
+    }
+
+    #update-status-button,
+    #task-status-select {
+        width: 100%;
+    }
+}

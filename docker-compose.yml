@@ -1,0 +1,51 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: laravel-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/var/www
+      - /var/www/vendor
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: vanilla-frontend
+    ports:
+      - "3000:80"
+    volumes:
+      - ./frontend/public/dist:/usr/share/nginx/html:ro
+
+  db:
+    image: mysql:8.0.32
+    container_name: mysql
+    environment:
+      MYSQL_DATABASE: laravel_db
+      MYSQL_USER: laravel_user
+      MYSQL_PASSWORD: laravel_pass
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+
+  php-my-admin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
+      - PMA_USER=laravel_user
+      - PMA_PASSWORD=laravel_pass
+    depends_on:
+      - db
+    ports:
+      - 8080:80
+
+  mailpit:
+    image: axllent/mailpit
+    container_name: mailpit
+    ports:
+      - "8025:8025"
+      - "1025:1025"  

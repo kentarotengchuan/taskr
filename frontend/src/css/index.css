@@ -1,0 +1,15 @@
+@import './base.css';
+@import './layout.css';
+
+@import './components/button.css';
+@import './components/modal.css';
+@import './components/sideBar.css';
+@import './components/taskCard.css';
+@import './components/teamCard.css';
+
+@import './views/loginView.css';
+@import './views/registerView.css';
+@import './views/verifyView.css';
+@import './views/dashboardView.css';
+@import './views/taskDetailView.css';
+@import './views/teamDetailView.css';

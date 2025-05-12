@@ -1,0 +1,89 @@
+.team-detail-card {
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+    line-height: 1.6;
+}
+
+/* タスク一覧 */
+.team-task-list h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+#team-task-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.task-card {
+    padding: 0.75rem 1rem;
+    background-color: #e0f2fe;
+    border: 1px solid #bae6fd;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.task-card:hover {
+    background-color: #7dd3fc;
+    color: white;
+}
+
+/* チャットエリア */
+.team-chat h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+#chat-log {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1rem;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #e2e8f0;
+    background-color: #ffffff;
+    border-radius: 6px;
+}
+
+#chat-log li {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 0.95rem;
+}
+
+/* チャットフォーム */
+.chat-form {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+#chat-input {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.chat-form button {
+    padding: 0.5rem 1rem;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.chat-form button:hover {
+    background-color: #1d4ed8;
+}

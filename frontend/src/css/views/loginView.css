@@ -1,0 +1,100 @@
+#login-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
+    background-color: #f8fafc;
+    color: #1e293b;
+}
+
+/* 見出し */
+#login-view h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* メッセージ（例: 認証失敗時） */
+.login-message {
+    color: #dc2626;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+/* フォーム全体 */
+.form {
+    background-color: white;
+    padding: 2rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* 入力フィールド */
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+    color: #475569;
+}
+
+.form-group input {
+    padding: 0.5rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 1px #2563eb33;
+}
+
+/* ボタン */
+#login-submit,
+#register-link {
+    padding: 0.5rem 1rem;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#register-link {
+    background-color: #64748b;
+}
+
+#login-submit:hover {
+    background-color: #1e40af;
+}
+
+#register-link:hover {
+    background-color: #475569;
+}
+
+/* 補助リンク */
+#forgot-password-link {
+    margin-top: 1rem;
+    color: #2563eb;
+    text-decoration: underline;
+    font-size: 0.9rem;
+}
+
+#forgot-password-link:hover {
+    color: #1e40af;
+}

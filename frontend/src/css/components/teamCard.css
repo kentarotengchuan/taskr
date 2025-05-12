@@ -1,0 +1,49 @@
+.team-detail-button {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-left: 5px solid #3b82f6;
+    /* 青系アクセント */
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.team-detail-button:hover {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.team-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.team-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+}
+
+.team-id {
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+
+.team-meta {
+    font-size: 0.85rem;
+    color: #475569;
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.team-description {
+    font-size: 0.95rem;
+    color: #334155;
+    line-height: 1.4;
+}

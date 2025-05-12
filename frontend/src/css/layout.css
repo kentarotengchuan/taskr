@@ -1,0 +1,77 @@
+/*全体のレイアウトを指定*/
+html, body {
+    margin: 0px;
+    height: 100%;
+}
+
+#app {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#title {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #1e293b;
+    /* ダークネイビー */
+    color: white;
+    padding: 1rem;
+    gap: 1rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+#title h1 {
+    font-size: 1.25rem;
+    margin: 0;
+    color: white;
+}
+
+/* サイドバー開閉ボタン */
+#sideBarButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: background-color 0.2s ease;
+}
+
+#sideBarButton:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+#sideBarButton svg {
+    fill: currentColor;
+    width: 24px;
+    height: 24px;
+}
+
+.view {
+    margin-left: 0;
+    padding: 0 2rem;
+    transition: margin-left 0.3s ease;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.view>header#title {
+    margin-left: -2rem;
+    margin-right: -2rem;
+    width: auto;
+}
+
+#title-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    /* headerの背景に合わせて白 */
+    margin: 0;
+}
