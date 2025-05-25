@@ -11,6 +11,17 @@ import { setupTaskDetailEvents } from './events/taskDetailEvents';
 import { renderTaskDetailView } from './views/taskDetailView';
 import { setupTeamDetailEvents } from './events/teamDetailEvents';
 import { renderTeamDetailView } from './views/teamDetailView';
+import { renderTaskAllView } from './views/taskAllView';
+import { setupTaskAllEvents } from './events/taskAllEvents';
+import { setupTeamAllEvents } from './events/teamAllEvents';
+import { renderTeamAllView } from './views/teamAllView';
+import { renderTaskCreateView } from './views/taskCreateView';
+import { setupTaskCreateEvents } from './events/taskCreateEvents';
+import { renderMypageView } from './views/mypageView';
+import { setupMypageEvents } from './events/mypageEvents';
+import { MeResponse } from './types/Response';
+import { renderProfileView } from './views/profileView';
+import { setupProfileEvents } from './events/profileEvents';
 
 type Route = {
     path: string;
@@ -58,6 +69,42 @@ const routes: Route[] = [
         event: async () => setupTeamDetailEvents(),
         title: 'Taskr(タスカル) - チーム'
     },
+    {
+        path: '/tasks',
+        view: async () => renderTaskAllView(),
+        event: async () => setupTaskAllEvents(),
+        title: 'Taskr(タスカル) - タスク一覧'
+    },
+    {
+        path: '/teams',
+        view: async () => renderTeamAllView(),
+        event: async () => setupTeamAllEvents(),
+        title: 'Taskr(タスカル) - チーム一覧'
+    },
+    {
+        path: '/create/task',
+        view: async () => renderTaskCreateView(),
+        event: async () => setupTaskCreateEvents(),
+        title: 'Taskr(タスカル) - タスク作成'
+    },
+    //{
+    //    path: '/team/create',
+    //    view: async () => renderTeamCreateView(),
+    //    event: async () => setupTeamCreateEvents(),
+    //    title: 'Taskr(タスカル) - タスク作成'
+    //},
+    {
+        path: '/mypage',
+        view: async () => renderMypageView(),
+        event: async () => setupMypageEvents(),
+        title: 'Taskr(タスカル) - マイページ'
+    },
+    {
+        path: '/mypage/profile',
+        view: async () => renderProfileView(),
+        event: async () => setupProfileEvents(),
+        title: 'Taskr(タスカル) - プロフィール設定'
+    }
 ];
 
 function matchRoute(): { route: Route; params: Record<string, string> } | null {
@@ -88,8 +135,8 @@ function matchRoute(): { route: Route; params: Record<string, string> } | null {
 }
 
 async function isAuthenticated(): Promise<boolean> {
-    const res = await apiGet('/user');
-    if (res.user) {
+    const res: MeResponse = await apiGet('/user');
+    if (res.result === "success") {
         return true;
     } else {
         return false;
@@ -118,7 +165,7 @@ export async function router(): Promise<void> {
 
     const { route, params } = matched;
     
-    const protectedRoutes: string[] = ['/dashboard', '/task', '/team'];
+    const protectedRoutes: string[] = ['/dashboard', '/task', '/team', '/tasks', '/create', '/mypage'];
     
     const needsAuth: boolean = protectedRoutes.some(path =>
         route.path === path || route.path.startsWith(`${path}/`)

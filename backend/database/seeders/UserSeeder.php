@@ -19,14 +19,28 @@ class UserSeeder extends Seeder
         User::updateOrCreate(['id' => 1], [
             'name' => 'test-user',
             'email' => 'test@test.com',
-            'email_verified_at' => now(),
+            'email_verified_at' => now('Asia/Tokyo'),
             'password' => bcrypt('hogehoge'),
         ]);
 
         User::updateOrCreate(['id' => 2], [
             'name' => 'test-user2',
             'email' => 'test2@test.com',
-            'email_verified_at' => now(),
+            'email_verified_at' => now('Asia/Tokyo'),
+            'password' => bcrypt('hogehoge'),
+        ]);
+
+        User::updateOrCreate(['id' => 3], [
+            'name' => 'test-user3',
+            'email' => 'test3@test.com',
+            'email_verified_at' => now('Asia/Tokyo'),
+            'password' => bcrypt('hogehoge'),
+        ]);
+
+        User::updateOrCreate(['id' => 4], [
+            'name' => 'test-user4',
+            'email' => 'test4@test.com',
+            'email_verified_at' => now('Asia/Tokyo'),
             'password' => bcrypt('hogehoge'),
         ]);
     }

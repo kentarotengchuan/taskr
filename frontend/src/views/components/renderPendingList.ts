@@ -1,0 +1,18 @@
+import { apiGet } from '../../api';
+import { Invite } from '../../types/Model';
+import { MeResponse } from '../../types/Response';
+
+export async function renderPendingList(teamId: number): Promise<void> {
+    const pendingList: HTMLElement | null = document.getElementById('team-pending-list');
+    const invitationRes = await apiGet(`/team/${teamId}/invitations`);
+
+    pendingList!.innerHTML = '';
+    
+    invitationRes.contents.forEach((invitation: any) => {
+        if (invitation.status === 'pending') {
+            const li = document.createElement('li');
+            li.textContent = invitation.invited_user.name;
+            pendingList?.appendChild(li);
+        }
+    });
+}

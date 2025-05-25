@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Task;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class TaskController extends Controller
 {
@@ -15,6 +17,30 @@ class TaskController extends Controller
         $tasks = Task::where('user_id', Auth::user()->id)
             ->orWhereIn('team_id',$teamIds)->with('team')->get();  
         return response()->json(['contents' => $tasks]);
+    }
+
+    public function create(Request $request)
+    {
+        try {
+            $task = Task::create([
+                'title' => $request->input('title'),
+                'description' => $request->input('description'),
+                'due_datetime' => Carbon::now('Asia/Tokyo'),
+                'user_id' => Auth::user()->id,
+                'team_id' => (int)$request->input('team_id') == 0 ? null : (int)$request->input('team_id'),
+            ]);
+
+            return response()->json([
+                'result' => 'success',
+                'message' => 'task created.',
+                'contents' => $task->id,
+            ]);
+        } catch (\Excepton $e) {
+            return response()->json([
+                'result' => 'failed',
+                'message' => $e->getMessage(),
+            ]);
+        }
     }
 
     public function show(Request $request, int $taskId)
@@ -39,7 +65,7 @@ class TaskController extends Controller
     {
         $task = Task::findOrFail($taskId);
 
-        $updatable = ['status', 'title', 'description', 'due_date', 'team_id'];
+        $updatable = ['status', 'title', 'description', 'due_datetime', 'team_id'];
 
         $data = $request->only($updatable);
 

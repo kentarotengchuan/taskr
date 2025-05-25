@@ -28,8 +28,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
 // ✅ 認証済みユーザー用ルート（要: auth:sanctum）
 Route::middleware(['auth:sanctum','verified'])->group(function () {
     Route::get('/user', [AuthController::class, 'me']);
+    Route::put('/user', [AuthController::class, 'edit']);
+    Route::get('/users', [AuthController::class, 'search']);
 
     Route::get('/task', [TaskController::class, 'all']);
+    Route::post('/task', [TaskController::class, 'create']);
     Route::get('/task/{taskId}', [TaskController::class, 'show']);
     Route::post('/task/{taskId}', [TaskController::class, 'update']);
 
@@ -40,6 +43,12 @@ Route::middleware(['auth:sanctum','verified'])->group(function () {
     Route::get('/team/{teamId}', [TeamController::class, 'show']);
     Route::get('/team/{teamId}/tasks', [TeamController::class, 'tasks']);
 
+    Route::get('/team/{teamId}/invitations', [TeamController::class, 'invitations']);
+    Route::post('/team/{teamId}/invitations', [TeamController::class, 'createInvitation']);
+    Route::delete('/team/{teamId}/invitations', [TeamController::class, 'reject']);
+
     Route::get('/team/{taskId}/comments', [CommentController::class, 'allOnTeam']);
     Route::post('/team/{teamId}/comments', [CommentController::class, 'postOnTeam']);
+
+    Route::post('/team/{teamId}/users', [TeamController::class, 'accept']);
 });

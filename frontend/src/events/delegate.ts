@@ -1,4 +1,4 @@
-type EventHandler = (target: HTMLElement, event: Event) => void;
+type EventHandler = (target: HTMLElement | HTMLInputElement, event: Event) => void;
 
 const registeredDelegates = new Set<string>();
 
@@ -14,8 +14,13 @@ export function delegate(
     parent.addEventListener(type, (event) => {
         const target = event.target as HTMLElement;
         const el = target?.closest(selector);
-        if (el) {
-            handler(el as HTMLElement, event);
+        if (target.matches(selector)) {
+            handler(target, event);
+        } else {
+            const el = target.closest(selector);
+            if (el) {
+                handler(el as HTMLElement, event);
+            }
         }
     });
 

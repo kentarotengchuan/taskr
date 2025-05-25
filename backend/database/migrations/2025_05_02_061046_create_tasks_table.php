@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->enum('status', ['open', 'in_progress', 'done'])->default('open');
-            $table->date('due_date')->nullable();
+            $table->dateTime('due_datetime')->nullable();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate(); //タスク作成者
             $table->foreignId('team_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();

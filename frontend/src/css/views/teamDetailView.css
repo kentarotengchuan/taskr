@@ -1,14 +1,29 @@
+.main-content {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* 左カラム：チームカード */
+.left-panel {
+    flex: 1;
+    max-width: 300px;
+}
+
 .team-detail-card {
     background-color: white;
     border: 1px solid #e2e8f0;
-    padding: 1.5rem;
     border-radius: 8px;
-    margin-bottom: 2rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     line-height: 1.6;
 }
 
-/* タスク一覧 */
+/* 右カラム：タスク一覧 */
+.right-panel {
+    flex: 2;
+}
+
 .team-task-list h2 {
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
@@ -18,52 +33,119 @@
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    margin-bottom: 2rem;
 }
 
 .task-card {
-    padding: 0.75rem 1rem;
-    background-color: #e0f2fe;
-    border: 1px solid #bae6fd;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    padding: 1rem;
     border-radius: 6px;
-    font-size: 0.95rem;
-    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    width: 200px;
     transition: background-color 0.2s ease;
 }
 
-.task-card:hover {
-    background-color: #7dd3fc;
-    color: white;
+.task-card.open {
+    background-color: #fef9c3;
+    /* 黄色系 */
 }
 
-/* チャットエリア */
+.task-card.in_progress {
+    background-color: #dbeafe;
+    /* 青系 */
+}
+
+.task-card.done {
+    background-color: #dcfce7;
+    /* 緑系背景 */
+    opacity: 0.6;
+}
+
+.task-card.expired {
+    border: 1px solid #f87171;
+    background-color: #fee2e2;
+}
+
+.task-card.expired.done {
+    border: 1px solid #e2e8f0;
+    background-color: #dcfce7;
+    /* 緑系背景 */
+    opacity: 0.6;
+}
+
+.task-warning {
+    color: #dc2626;
+    font-weight: bold;
+    margin-left: 0.25rem;
+}
+
+.task-title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.task-meta {
+    font-size: 0.85rem;
+    color: #475569;
+    margin-bottom: 0.25rem;
+}
+
+/* ステータスバッジ */
+.status-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    border-radius: 9999px;
+    color: white;
+    font-weight: 600;
+}
+
+.status-badge.open {
+    background-color: #facc15;
+    /* yellow */
+    color: #1f2937;
+}
+
+.status-badge.in_progress {
+    background-color: #3b82f6;
+    /* blue */
+}
+
+.status-badge.done {
+    background-color: #10b981;
+    /* green */
+}
+
+/* チャット */
+.team-chat {
+    margin-top: 2rem;
+}
+
 .team-chat h2 {
     font-size: 1.2rem;
     margin-bottom: 1rem;
 }
 
 #chat-log {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 1rem;
     max-height: 200px;
     overflow-y: auto;
+    background: white;
     border: 1px solid #e2e8f0;
-    background-color: #ffffff;
     border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    list-style: none;
 }
 
 #chat-log li {
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0;
     border-bottom: 1px solid #f1f5f9;
-    font-size: 0.95rem;
 }
 
-/* チャットフォーム */
 .chat-form {
     display: flex;
     gap: 0.5rem;
-    align-items: center;
 }
 
 #chat-input {
@@ -71,19 +153,37 @@
     padding: 0.5rem;
     border: 1px solid #cbd5e1;
     border-radius: 6px;
-    font-size: 1rem;
 }
 
 .chat-form button {
-    padding: 0.5rem 1rem;
     background-color: #2563eb;
     color: white;
     border: none;
     border-radius: 6px;
-    font-size: 1rem;
+    padding: 0 1rem;
     cursor: pointer;
 }
 
 .chat-form button:hover {
     background-color: #1d4ed8;
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column;
+    }
+
+    .left-panel,
+    .right-panel {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    #team-task-container {
+        flex-direction: column;
+    }
+
+    .task-card {
+        width: 100%;
+    }
 }

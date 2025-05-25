@@ -19,13 +19,13 @@ class TeamUserSeeder extends Seeder
 
         $testUser1->teams()->attach(1, [
             'role' => 'member',
-            'created_at' => now(),
-            'updated_at' => now(),
+            'created_at' => now('Asia/Tokyo'),
+            'updated_at' => now('Asia/Tokyo'),
         ]);
         $testUser2->teams()->attach(1, [
             'role' => 'member',
-            'created_at' => now(),
-            'updated_at' => now(),
+            'created_at' => now('Asia/Tokyo'),
+            'updated_at' => now('Asia/Tokyo'),
         ]);
 
     }

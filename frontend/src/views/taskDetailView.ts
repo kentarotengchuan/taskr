@@ -17,7 +17,7 @@ export async function renderTaskDetailView(id: number): Promise<void> {
         return;
     }
 
-    const task = result.contents;
+    const task: Task = result.contents;
 
     app.innerHTML = `
     <section id="task-detail-view" class="view">
@@ -32,7 +32,7 @@ export async function renderTaskDetailView(id: number): Promise<void> {
         </button>
         <div class="task-detail-card ${task.status}">
             <p><strong>説明:</strong> ${task.description ?? '（なし）'}</p>
-            <p><strong>期限:</strong> ${task.due_date ?? '未設定'}</p>
+            <p><strong>期限:</strong> ${formatDateTime(task.due_datetime) ?? '未設定'}</p>
             <p><strong>作成者:</strong> ${task.user?.name ?? '不明'}</p>
             <p><strong>チーム:</strong> ${task.team?.name ?? '（個人タスク）'}</p>
             <p><strong>作成日時:</strong> ${formatDate(task.created_at)}</p>
@@ -43,7 +43,7 @@ export async function renderTaskDetailView(id: number): Promise<void> {
                     ${renderStatusLabel(task.status)}
                 </span>
                 <label for="task-status-select">ステータス変更:</label>
-                <select id="task-status-select">
+                <select id="task-status-select" class="${task.status}">
                     <option disabled selected hidden>選択してください</option>
                     ${task.status !== 'open' ? '<option value="open">未着手</option>' : ''}
                     ${task.status !== 'in_progress' ? '<option value="in_progress">進行中</option>' : ''}
@@ -90,4 +90,10 @@ function renderStatusLabel(status: Task['status']): string {
 function formatDate(iso: string): string {
     const d = new Date(iso);
     return `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}`;
+}
+
+function formatDateTime(iso: string | null): string {
+    if (!iso) return '';
+    const d = new Date(iso);
+    return `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()} ${d.getHours()}:${String(d.getMinutes()).padStart(2, '0')}`;
 }

@@ -3,6 +3,10 @@ export type User = {
     name: string;
     email: string;
     img_path?: string | null;
+    teams?: Team[];
+    ownedTeams?: Team[];
+    tasks?: Task[];
+    invitations?: Invite[];
 };
 
 export type Team = {
@@ -21,7 +25,7 @@ export type Task = {
     title: string;
     description: string | null;
     status: 'open' | 'in_progress' | 'done';
-    due_date: string | null; // ISO日付文字列
+    due_datetime: string | null;
     user_id: number;
     team_id: number | null;
     created_at: string;
@@ -35,5 +39,16 @@ export type Comment = {
     content: string;
     user: User;
     task?: Task;
+}
+
+export type Invite = {
+    id: number;
+    team_id: number;
+    invited_user_id: number;
+    inviter_user_id: number;
+    status: 'pending' | 'accepted';
+    created_at: string;
+    updated_at: string;
+    team: Team;
 }
 

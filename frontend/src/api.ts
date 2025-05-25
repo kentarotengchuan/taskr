@@ -91,3 +91,24 @@ export async function apiPostForm(endpoint: string, formData: FormData): Promise
     });
     return await res.json();
 }
+
+export async function apiDelete(endpoint: string): Promise<any> {
+    const res = await fetch(API_BASE + endpoint, {
+        method: 'DELETE',
+        headers: getHeaders(),
+        credentials: 'include',
+    });
+    return await res.json();
+}
+
+export async function apiPutForm(endpoint: string, formData: FormData): Promise<any> {
+    formData.append('_method', 'PUT');
+
+    const res = await fetch(API_BASE + endpoint, {
+        method: 'POST',
+        headers: getHeaders(false),
+        credentials: 'include',
+        body: formData,
+    });
+    return await res.json();
+}

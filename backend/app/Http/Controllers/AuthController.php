@@ -73,7 +73,58 @@ class AuthController extends Controller
 
     public function me(Request $request)
     {
-        return response()->json(['user' => Auth::user()]);
+        try {
+            $user = User::with(['teams', 'ownedTeams', 'tasks', 'invitations.team'])->find(Auth::id());
+
+            return response()->json([
+                'result' => 'success',
+                'message' => 'User returned.',
+                'contents' => $user,
+            ]);
+        } catch(\Exception $e) {
+            return response()->json([
+                'result' => 'failed',
+                'message' => $e->getMessage(),
+            ]);
+        }
+        
+    }
+
+    public function search(Request $request) {
+        try {
+            $word = $request->input('name');
+
+            $users = User::where('id','!=',auth()->user()   ->id)->where('name', 'like', '%' . $word . '%')->with(['invitations','teams'])->get();
+            return response()->json([
+                'result' => 'success',
+                'message' => 'You got match users.',
+                'contents' => $users,
+            ]); 
+        } catch (\Exception $e) {
+            return response()->json([
+                'result' => 'failed',
+                'message' => $e->getMessage(),
+            ]); 
+        }
+        
+    }
+
+    public function edit(Request $request) {
+        try {
+            User::find(Auth::id())
+            ->update([
+                'name' => $request->input('name'),
+            ]);
+            return response()->json([
+                'result' => 'success',
+                'message' => 'Complete to edit.',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'result' => 'failed',
+                'message' => $e->getMessage(),
+            ]); 
+        } 
     }
 
     public function verify(EmailVerificationRequest $request)
