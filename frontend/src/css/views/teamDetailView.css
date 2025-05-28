@@ -4,7 +4,6 @@
     margin-bottom: 2rem;
 }
 
-/* 左カラム：チームカード */
 .left-panel {
     flex: 1;
     max-width: 300px;
@@ -19,7 +18,6 @@
     line-height: 1.6;
 }
 
-/* 右カラム：タスク一覧 */
 .right-panel {
     flex: 2;
 }
@@ -47,17 +45,14 @@
 
 .task-card.open {
     background-color: #fef9c3;
-    /* 黄色系 */
 }
 
 .task-card.in_progress {
     background-color: #dbeafe;
-    /* 青系 */
 }
 
 .task-card.done {
     background-color: #dcfce7;
-    /* 緑系背景 */
     opacity: 0.6;
 }
 
@@ -69,7 +64,6 @@
 .task-card.expired.done {
     border: 1px solid #e2e8f0;
     background-color: #dcfce7;
-    /* 緑系背景 */
     opacity: 0.6;
 }
 
@@ -91,7 +85,6 @@
     margin-bottom: 0.25rem;
 }
 
-/* ステータスバッジ */
 .status-badge {
     display: inline-block;
     padding: 2px 8px;
@@ -103,21 +96,17 @@
 
 .status-badge.open {
     background-color: #facc15;
-    /* yellow */
     color: #1f2937;
 }
 
 .status-badge.in_progress {
     background-color: #3b82f6;
-    /* blue */
 }
 
 .status-badge.done {
     background-color: #10b981;
-    /* green */
 }
 
-/* チャット */
 .team-chat {
     margin-top: 2rem;
 }

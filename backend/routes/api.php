@@ -17,7 +17,6 @@ use App\Http\Controllers\CommentController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-// ✅ セッションベースの認証（Sanctum）用ルート（ログイン）
 Route::post('/login', [AuthController::class, 'login']); 
 Route::post('/register',[AuthController::class, 'register']);
 
@@ -25,7 +24,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout',[AuthController::class,'logout']);
 });
 
-// ✅ 認証済みユーザー用ルート（要: auth:sanctum）
 Route::middleware(['auth:sanctum','verified'])->group(function () {
     Route::get('/user', [AuthController::class, 'me']);
     Route::put('/user', [AuthController::class, 'edit']);

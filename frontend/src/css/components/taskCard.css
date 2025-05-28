@@ -7,7 +7,6 @@
     margin-bottom: 1rem;
     border: 1px solid #e2e8f0;
     border-left: 6px solid transparent;
-    /* 色区別用 */
     border-radius: 8px;
     background-color: #f8fafc;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
@@ -21,13 +20,11 @@
     transform: translateY(-2px);
 }
 
-/* チームなし（個人タスク） */
 .task-detail-button.red {
     border-left-color: #6b7280;
     background-color: #FFFFFF;
 }
 
-/* チームあり（チームタスク） */
 .task-detail-button.green {
     border-left-color: #3b82f6;
     background-color: #FFFFFF;
@@ -92,7 +89,6 @@
     line-height: 1.4;
 }
 
-/* スマホ対応 */
 @media (max-width: 640px) {
     .task-detail-button {
         padding: 0.75rem;

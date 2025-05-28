@@ -9,13 +9,11 @@
     color: #1e293b;
 }
 
-/* タイトル */
 #register-view h1 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
 }
 
-/* 登録フォーム */
 #register-form {
     background-color: white;
     padding: 2rem;
@@ -29,7 +27,6 @@
     gap: 1rem;
 }
 
-/* フォームグループ */
 .form-group {
     display: flex;
     flex-direction: column;
@@ -55,7 +52,6 @@
     box-shadow: 0 0 0 1px #2563eb33;
 }
 
-/* 登録ボタン */
 #register-submit {
     padding: 0.5rem 1rem;
     background-color: #10b981;
@@ -71,7 +67,6 @@
     background-color: #059669;
 }
 
-/* ログインに戻るリンク風ボタン */
 #login-link {
     padding: 0.5rem 1rem;
     background-color: #64748b;

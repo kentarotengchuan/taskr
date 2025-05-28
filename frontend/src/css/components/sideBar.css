@@ -53,7 +53,6 @@
 
 #sideBar a.active {
     background-color: #2563eb;
-    /* アクティブ色 */
     font-weight: bold;
 }
 
@@ -61,7 +60,6 @@
     margin-left: 220px;
 }
 
-/* モバイル対応（必要に応じて） */
 @media (max-width: 768px) {
     #sideBar {
         width: 180px;

@@ -1,4 +1,3 @@
-/*全体のレイアウトを指定*/
 html, body {
     margin: 0px;
     height: 100%;
@@ -19,7 +18,6 @@ html, body {
     align-items: center;
     justify-content: flex-start;
     background-color: #1e293b;
-    /* ダークネイビー */
     color: white;
     padding: 1rem;
     gap: 1rem;
@@ -32,7 +30,6 @@ html, body {
     color: white;
 }
 
-/* サイドバー開閉ボタン */
 #sideBarButton {
     background: none;
     border: none;
@@ -76,6 +73,5 @@ html, body {
     font-size: 1.5rem;
     font-weight: 700;
     color: #ffffff;
-    /* headerの背景に合わせて白 */
     margin: 0;
 }

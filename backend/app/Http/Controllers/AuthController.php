@@ -111,10 +111,17 @@ class AuthController extends Controller
 
     public function edit(Request $request) {
         try {
-            User::find(Auth::id())
-            ->update([
-                'name' => $request->input('name'),
-            ]);
+            $user = Auth::user();
+
+            $user->name = $request->input('name');
+
+            if ($request->hasFile('image')) {
+                $path = $request->file('image')->store('public/user_images');
+                $user->img_path = basename($path);
+            }
+
+            $user->save();
+
             return response()->json([
                 'result' => 'success',
                 'message' => 'Complete to edit.',

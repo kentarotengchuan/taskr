@@ -6,6 +6,7 @@
 @import './components/sideBar.css';
 @import './components/taskCard.css';
 @import './components/teamCard.css';
+@import './components/userImage.css';
 
 @import './views/loginView.css';
 @import './views/registerView.css';
@@ -15,3 +16,4 @@
 @import './views/teamDetailView.css';
 @import './views/taskAllView.css';
 @import './views/mypageView.css';
+@import './views/profileView.css';

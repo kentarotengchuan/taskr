@@ -3,7 +3,6 @@ import { register } from '../services/authService';
 
 let eventBound = false;
 
-// ログイン画面用イベント登録
 export function setupRegisterEvents(): void {
     if (eventBound) return;
     eventBound = true;
@@ -11,7 +10,6 @@ export function setupRegisterEvents(): void {
     const app = document.getElementById('app');
     if (!app) return;
 
-    // フォーム送信時の処理（submitイベント）
     delegate(app, '#register-form', 'submit', async (el, event) => {
         event.preventDefault();
 

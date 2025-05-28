@@ -48,4 +48,20 @@ export function setupProfileEvents(): void {
             console.error(`エラー: ${res.message}`);
         }
     });
+
+    delegate(app, '#edit-image', 'change', async (el, event) => {
+        event.preventDefault();
+
+        const input = el as HTMLInputElement;
+        const file = input.files?.[0];
+        const previewImage = document.getElementById('image-preview') as HTMLImageElement;
+
+        if (file && previewImage) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                previewImage.src = reader.result as string;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
 }

@@ -9,20 +9,17 @@
     color: #1e293b;
 }
 
-/* 見出し */
 #login-view h1 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
 }
 
-/* メッセージ（例: 認証失敗時） */
 .login-message {
     color: #dc2626;
     margin-bottom: 1rem;
     font-weight: bold;
 }
 
-/* フォーム全体 */
 .form {
     background-color: white;
     padding: 2rem;
@@ -36,7 +33,6 @@
     gap: 1rem;
 }
 
-/* 入力フィールド */
 .form-group {
     display: flex;
     flex-direction: column;
@@ -62,7 +58,6 @@
     box-shadow: 0 0 0 1px #2563eb33;
 }
 
-/* ボタン */
 #login-submit,
 #register-link {
     padding: 0.5rem 1rem;
@@ -87,7 +82,6 @@
     background-color: #475569;
 }
 
-/* 補助リンク */
 #forgot-password-link {
     margin-top: 1rem;
     color: #2563eb;

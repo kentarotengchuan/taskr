@@ -25,13 +25,21 @@ export async function renderProfileView(): Promise<void> {
             </svg>
         </button>
         <p id="edit-title">プロフィール設定</p>
-        <form id="profile-edit-form" class="form">
+        <form id="profile-edit-form" class="form__update-profile">
+            <div class="form-group image-form">
+                <label for="edit-image">プロフィール画像</label>
+                <div class="image-form__inner">
+                    <img id="image-preview" class="preview-image" src="http://localhost:8000/storage/user_images/${user?.img_path || 'emp.png'}" alt="プロフィール画像" />
+                    <label for="edit-image" class="button__upload">画像を選択</label>
+                    <input type="file" id="edit-image" name="image" accept="image/*" />
+                </div>
+            </div>
             <div class="form-group">
                 <label for="edit-name">名前</label>
                 <input type="string" name="name" id="edit-name" placeholder="山田太郎" value="${user?.name}" />
                 <p id="validation-error-name"></p>
             </div>
-            <button type="submit" id="submit-button">編集</button>
+            <button type="submit" id="submit-button" class="button__update-profile">編集</button>
         </form>
     </section>
     `;
