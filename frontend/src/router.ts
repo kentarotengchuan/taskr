@@ -22,6 +22,8 @@ import { setupMypageEvents } from './events/mypageEvents';
 import { MeResponse } from './types/Response';
 import { renderProfileView } from './views/profileView';
 import { setupProfileEvents } from './events/profileEvents';
+import { setupTeamCreateEvents } from './events/teamCreateEvents';
+import { renderTeamCreateView } from './views/teamCreateView';
 
 type Route = {
     path: string;
@@ -87,12 +89,12 @@ const routes: Route[] = [
         event: async () => setupTaskCreateEvents(),
         title: 'Taskr(タスカル) - タスク作成'
     },
-    //{
-    //    path: '/team/create',
-    //    view: async () => renderTeamCreateView(),
-    //    event: async () => setupTeamCreateEvents(),
-    //    title: 'Taskr(タスカル) - タスク作成'
-    //},
+    {
+        path: '/create/team',
+        view: async () => renderTeamCreateView(),
+        event: async () => setupTeamCreateEvents(),
+        title: 'Taskr(タスカル) - タスク作成'
+    },
     {
         path: '/mypage',
         view: async () => renderMypageView(),

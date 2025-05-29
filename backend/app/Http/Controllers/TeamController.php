@@ -69,6 +69,42 @@ class TeamController extends Controller
         }  
     }
 
+    public function create(Request $request) {
+        try {
+            $team = Team::create([
+                'name' => $request->title,
+                'description' => $request->description,
+                'owner_id' => Auth::id(),
+            ]);
+
+            TeamUser::create([
+                'team_id' => $team->id,
+                'user_id' => Auth::id(),
+                'role' => 'owner',
+            ]);
+
+            foreach ($request->ids as $id) {
+                Invite::create([
+                    'team_id' => $team->id,
+                    'invited_user_id' => $id,
+                    'inviter_user_id' => Auth::id(),
+                    'status' => 'pending',
+                ]);
+            }
+
+            return response()->json([
+                'result' => 'success',
+                'message' => 'Team created.',
+                'contents' => $team,
+            ]);
+        } catch(\Exception $e) {
+            return response()->json([
+                'result' => 'failed',
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
+
     public function createInvitation(Request $request, int $teamId) {
         try {
             $inviterId = Auth::user()->id;

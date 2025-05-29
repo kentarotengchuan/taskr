@@ -19,7 +19,10 @@ export async function renderDashboardView(): Promise<void> {
         <a href="/create/task" class="create-link">タスク作成</a>
       </div>
       <div id="task-container"></div>
-      <p id="team-title">チーム一覧</p>
+      <div id="team-title">
+        <span>チーム一覧</span>
+        <a href="/create/team" class="create-link">チーム作成</a>
+      </div>
       <div id="team-container"></div>
     </section>`;
   

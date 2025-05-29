@@ -73,3 +73,9 @@ export type RejectResponse = {
     result: 'success' | 'failed';
     message: string;
 }
+
+export type TeamCreateResponse = {
+    result: 'success' | 'failed';
+    message: string;
+    contents: Team;
+}

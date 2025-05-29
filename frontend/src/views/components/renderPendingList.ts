@@ -4,9 +4,10 @@ import { MeResponse } from '../../types/Response';
 
 export async function renderPendingList(teamId: number): Promise<void> {
     const pendingList: HTMLElement | null = document.getElementById('team-pending-list');
-    const invitationRes = await apiGet(`/team/${teamId}/invitations`);
 
     pendingList!.innerHTML = '';
+
+    const invitationRes = await apiGet(`/team/${teamId}/invitations`);
     
     invitationRes.contents.forEach((invitation: any) => {
         if (invitation.status === 'pending') {

@@ -38,6 +38,7 @@ Route::middleware(['auth:sanctum','verified'])->group(function () {
     Route::post('/task/{taskId}/comments', [CommentController::class, 'postOnTask']);
 
     Route::get('/team', [TeamController::class, 'all']);
+    Route::post('/team', [TeamController::class, 'create']);
     Route::get('/team/{teamId}', [TeamController::class, 'show']);
     Route::get('/team/{teamId}/tasks', [TeamController::class, 'tasks']);
 
