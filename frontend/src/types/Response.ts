@@ -1,4 +1,4 @@
-import { User, Task, Team, Comment } from './Model';
+import { User, Task, Team, CommentData } from './Model';
 
 export type ValidationErrorResponse = {
     message: string;
@@ -55,7 +55,7 @@ export type TaskUpdateResponse = {
 export type CommentResponse = {
     result: 'success' | 'failed';
     message: string;
-    contents?: Comment[];
+    contents?: CommentData[];
 }
 
 export type MeResponse = {

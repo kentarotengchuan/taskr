@@ -1,8 +1,10 @@
 import { delegate } from "./delegate";
 import { logout } from "../services/authService";
-import { apiPost } from "../api";
+import { apiGet, apiPost } from "../api";
 import { renderTaskDetailView } from "../views/taskDetailView";
-import { TaskUpdateResponse } from "../types/Response";
+import { CommentResponse, TaskUpdateResponse } from "../types/Response";
+import { renderCommentList } from "../views/components/renderCommentList";
+import { CommentData } from "../types/Model";
 
 let eventBound = false;
 
@@ -60,6 +62,7 @@ export function setupTaskDetailEvents(): void {
 
         if (res.result === 'success') {
             console.log(res.message);
+
             await renderTaskDetailView(Number(el.dataset.id));
         } else {
             console.error(`エラー: ${res.message}`);

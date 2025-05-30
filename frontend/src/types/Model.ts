@@ -34,7 +34,7 @@ export type Task = {
     team?: Team; // with(['team'])されていれば入る
 };
 
-export type Comment = {
+export type CommentData = {
     id: number;
     content: string;
     user: User;

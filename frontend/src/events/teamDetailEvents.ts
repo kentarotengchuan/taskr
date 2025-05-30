@@ -2,9 +2,11 @@ import { delegate } from "./delegate";
 import { logout } from "../services/authService";
 import { apiGet, apiPost } from "../api";
 import { renderTeamDetailView } from "../views/teamDetailView";
-import { Invite, User } from "../types/Model";
+import { CommentData, Invite, User } from "../types/Model";
 import { renderSuggestionList } from "../views/components/renderSuggestionList";
 import { renderPendingList } from "../views/components/renderPendingList";
+import { CommentResponse } from "../types/Response";
+import { renderCommentList } from "../views/components/renderCommentList";
 
 let eventBound = false;
 
@@ -75,8 +77,10 @@ export function setupTeamDetailEvents(): void {
         const res = await apiPost(`/team/${el.dataset.id}/comments`, {
             content: body
         });
+
         if (res.result === 'success') {
             console.log(res.message);
+
             await renderTeamDetailView(Number(el.dataset.id));
         } else {
             console.error(`エラー: ${res.message}`);

@@ -1,7 +1,9 @@
 import { apiGet } from "../api";
 import { CommentResponse, DetailResponse } from "../types/Response";
 import { setUpSideBarView } from "./sideBarView";
-import { Task } from "../types/Model";
+import { CommentData, Task } from "../types/Model";
+import { comment } from "postcss";
+import { renderCommentList } from "./components/renderCommentList";
 
 export async function renderTaskDetailView(id: number): Promise<void> {
     const app: HTMLElement | null = document.getElementById('app');
@@ -69,13 +71,10 @@ export async function renderTaskDetailView(id: number): Promise<void> {
 
     const commentList: HTMLElement | null = document.getElementById('comment-list');
     const commentRes: CommentResponse = await apiGet(`/task/${task.id}/comments`);
-    if(commentRes.contents){
-        for (const comment of commentRes.contents) {
-            const li = document.createElement('li');
-            li.textContent = `${comment.user.name}: ${comment.content}`;
-            commentList?.appendChild(li);
-        }
-    }
+    const comments: CommentData[] | undefined = commentRes.contents;
+    
+    if (comments) await renderCommentList(comments);
+    if (commentList) commentList.scrollTop = commentList.scrollHeight;
 }
 
 function renderStatusLabel(status: Task['status']): string {

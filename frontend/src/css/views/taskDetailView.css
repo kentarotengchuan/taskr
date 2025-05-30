@@ -108,24 +108,6 @@
     background-color: #10b981;
 }
 
-.comment-container {
-    margin-top: 2rem;
-}
-
-#comment-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 1rem;
-}
-
-#comment-list li {
-    margin-bottom: 0.75rem;
-    padding: 0.5rem 1rem;
-    background-color: #f1f5f9;
-    border-radius: 6px;
-    color: #1e293b;
-}
-
 .comment-form {
     position: sticky;
     bottom: 0;

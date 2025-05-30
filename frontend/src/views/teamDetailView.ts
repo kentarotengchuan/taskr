@@ -1,6 +1,7 @@
 import { apiGet } from "../api";
-import { Task, User } from "../types/Model";
+import { CommentData, Task, User } from "../types/Model";
 import { CommentResponse } from "../types/Response";
+import { renderCommentList } from "./components/renderCommentList";
 import { renderPendingList } from "./components/renderPendingList";
 import { setUpSideBarView } from "./sideBarView";
 
@@ -60,7 +61,7 @@ export async function renderTeamDetailView(id: number): Promise<void> {
 
         <div class="team-chat">
             <h2>チームチャット</h2>
-            <ul id="chat-log"></ul>
+            <ul id="comment-list"></ul>
             <form id="chat-form" class="chat-form" data-id="${team.id}">
                 <input type="text" id="chat-input" placeholder="メッセージを入力..." required />
                 <button type="submit">送信</button>
@@ -107,18 +108,12 @@ export async function renderTeamDetailView(id: number): Promise<void> {
 
     await renderPendingList(team.id);
 
-    const chatLog: HTMLElement | null = document.getElementById('chat-log');
+    const commentList: HTMLElement | null = document.getElementById('comment-list');
     const commentRes: CommentResponse = await apiGet(`/team/${team.id}/comments`);
-    if(commentRes.contents){
-        for (const comment of commentRes.contents) {
-            const li = document.createElement('li');
-            li.textContent = `${comment.user.name}: ${comment.content}`;
-            chatLog?.appendChild(li);
-        }
-    }
-    if (chatLog) {
-        chatLog.scrollTop = chatLog.scrollHeight;
-    }
+    const comments: CommentData[] | undefined = commentRes.contents;
+        
+    if (comments) await renderCommentList(comments);
+    if (commentList) commentList.scrollTop = commentList.scrollHeight;
 }
 
 function renderStatusLabel(status: Task['status']): string {

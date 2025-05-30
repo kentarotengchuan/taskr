@@ -1,0 +1,59 @@
+import { apiGet } from '../../api';
+import { CommentData, User } from '../../types/Model';
+import { CommentResponse, MeResponse } from '../../types/Response';
+
+export async function renderCommentList(comments: CommentData[]): Promise<void> {
+    const commentContainer: HTMLElement | null = document.getElementById('comment-list');
+
+    commentContainer!.innerHTML = '';
+
+    const res: MeResponse = await apiGet('/user');
+    if (res.result === 'failed') {
+        console.error('エラー: ユーザー情報の取得に失敗しました。');
+        return;
+    }
+    const user: User | undefined = res.contents;
+    const authId: number | undefined = user?.id;
+    
+
+    for (const comment of comments) {
+        const div = document.createElement('div');
+        div.classList.add('comment__wrapper');
+
+        const imgDiv = document.createElement('div');
+        imgDiv.classList.add('image__wrapper');
+
+        const img = document.createElement('img');
+        img.classList.add('image__comment');
+        img.src = `http://localhost:8000/storage/user_images/${user?.img_path || 'emp.png'}`;
+
+        imgDiv.appendChild(img);
+
+        const contentDiv = document.createElement('div');
+        contentDiv.classList.add('content__wrapper');
+        
+        const nameSpan = document.createElement('span');
+        nameSpan.classList.add('content__name');
+        nameSpan.textContent = comment.user.name;
+
+        const contentSpan = document.createElement('span');
+        contentSpan.classList.add('content__comment');
+        contentSpan.textContent = comment.content;
+
+        contentDiv.appendChild(nameSpan);
+        contentDiv.appendChild(contentSpan);
+        
+        div.appendChild(imgDiv);
+
+        const isAuth: boolean = comment.user.id === authId;        
+        if (isAuth) { 
+            div.prepend(contentDiv);
+            div.classList.add('right-side');
+        } else {
+            div.appendChild(contentDiv);
+            div.classList.add('left-side');
+        }
+
+        commentContainer?.appendChild(div);
+    }
+}
