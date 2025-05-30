@@ -39,7 +39,10 @@ export async function renderTeamDetailView(id: number): Promise<void> {
 
             <div class="right-panel">
                 <div class="team-task-list">
-                    <h2>タスク一覧</h2>
+                    <div id="task-title">
+                        <span>タスク一覧</span>
+                        <a href="/create/task" class="create-link">タスク作成</a>
+                    </div>
                     <div id="team-task-container"></div>
                 </div>
             </div>
@@ -62,11 +65,12 @@ export async function renderTeamDetailView(id: number): Promise<void> {
         <div class="team-chat">
             <h2>チームチャット</h2>
             <ul id="comment-list"></ul>
-            <form id="chat-form" class="chat-form" data-id="${team.id}">
-                <input type="text" id="chat-input" placeholder="メッセージを入力..." required />
-                <button type="submit">送信</button>
-            </form>
         </div>
+
+        <form id="chat-form" class="comment-form" data-id="${team.id}">
+            <input type="text" id="chat-input" placeholder="メッセージを入力..." required />
+            <button type="submit">送信</button>
+        </form>
     </section>
     `;
 

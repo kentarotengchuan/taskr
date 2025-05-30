@@ -18,7 +18,7 @@ class TeamSeeder extends Seeder
         Team::updateOrCreate(['id' => 1], [
             'name' => 'test-team',
             'description' => "It's test-team. Members are test-user1 and test-user2.",
-            'owner_id' => 1,
+            'owner_id' => 2,
         ]);
     }
 }

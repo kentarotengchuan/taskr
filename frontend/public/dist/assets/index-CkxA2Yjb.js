@@ -87,7 +87,7 @@ var La=Object.defineProperty;var Fa=(n,t,e)=>t in n?La(n,t,{enumerable:!0,config
         <span class="team-created">📅 ${Ga(r.created_at)}~</span>
       </div>
       <p class="team-description">${r.description??"（説明なし）"}</p>
-      `,s.appendChild(a)})}function qa(n){switch(n){case"open":return"未着手";case"in_progress":return"進行中";case"done":return"完了済み";default:return n}}function Ga(n){const t=new Date(n);return`${t.getFullYear()}/${t.getMonth()+1}/${t.getDate()}`}function Ka(n){const t=new Date(n);return`${t.getFullYear()}/${t.getMonth()+1}/${t.getDate()} ${t.getHours()}:${String(t.getMinutes()).padStart(2,"0")}`}async function dr(n){const t=document.getElementById("comment-list");t.innerHTML="";const e=await q("/user");if(e.result==="failed"){console.error("エラー: ユーザー情報の取得に失敗しました。");return}const i=e.contents,s=i==null?void 0:i.id;for(const o of n){const r=document.createElement("div");r.classList.add("comment__wrapper");const a=document.createElement("div");a.classList.add("image__wrapper");const l=document.createElement("img");l.classList.add("image__comment"),l.src=`http://localhost:8000/storage/user_images/${(i==null?void 0:i.img_path)||"emp.png"}`,a.appendChild(l);const c=document.createElement("div");c.classList.add("content__wrapper");const d=document.createElement("span");d.classList.add("content__name"),d.textContent=o.user.name;const h=document.createElement("span");h.classList.add("content__comment"),h.textContent=o.content,c.appendChild(d),c.appendChild(h),r.appendChild(a),o.user.id===s?(r.prepend(c),r.classList.add("right-side")):(r.appendChild(c),r.classList.add("left-side")),t==null||t.appendChild(r)}}async function li(n){var l,c;const t=document.getElementById("app");if(!t){console.error("App element not found");return}const e=await q(`/task/${n}`);if(!e.contents){console.error(`Error:${e.message}`);return}const i=e.contents;t.innerHTML=`
+      `,s.appendChild(a)})}function qa(n){switch(n){case"open":return"未着手";case"in_progress":return"進行中";case"done":return"完了済み";default:return n}}function Ga(n){const t=new Date(n);return`${t.getFullYear()}/${t.getMonth()+1}/${t.getDate()}`}function Ka(n){const t=new Date(n);return`${t.getFullYear()}/${t.getMonth()+1}/${t.getDate()} ${t.getHours()}:${String(t.getMinutes()).padStart(2,"0")}`}async function dr(n){const t=document.getElementById("comment-list");t.innerHTML="";const e=await q("/user");if(e.result==="failed"){console.error("エラー: ユーザー情報の取得に失敗しました。");return}const i=e.contents,s=i==null?void 0:i.id;for(const o of n)if(o.user.id!==1){const r=document.createElement("div");r.classList.add("comment__wrapper");const a=document.createElement("div");a.classList.add("image__wrapper");const l=document.createElement("img");l.classList.add("image__comment"),l.src=`http://localhost:8000/storage/user_images/${o.user.img_path||"emp.png"}`,a.appendChild(l);const c=document.createElement("div");c.classList.add("content__wrapper");const d=document.createElement("span");d.classList.add("content__name"),d.textContent=o.user.name;const h=document.createElement("span");h.classList.add("content__comment"),h.textContent=o.content,c.appendChild(d),c.appendChild(h),r.appendChild(a),o.user.id===s?(r.prepend(c),r.classList.add("right-side")):(r.appendChild(c),r.classList.add("left-side")),t==null||t.appendChild(r)}else{const r=document.createElement("div");r.classList.add("comment__wrapper"),r.classList.add("admin");const a=document.createElement("span");a.classList.add("content__comment"),a.classList.add("admin"),a.textContent=o.content,r.appendChild(a),t==null||t.appendChild(r)}}async function li(n){var l,c;const t=document.getElementById("app");if(!t){console.error("App element not found");return}const e=await q(`/task/${n}`);if(!e.contents){console.error(`Error:${e.message}`);return}const i=e.contents;t.innerHTML=`
     <section id="task-detail-view" class="view">
         <header id="title">
             <h1 id="title-text">${i.title}</h1>
@@ -154,7 +154,10 @@ var La=Object.defineProperty;var Fa=(n,t,e)=>t in n?La(n,t,{enumerable:!0,config
 
             <div class="right-panel">
                 <div class="team-task-list">
-                    <h2>タスク一覧</h2>
+                    <div id="task-title">
+                        <span>タスク一覧</span>
+                        <a href="/create/task" class="create-link">タスク作成</a>
+                    </div>
                     <div id="team-task-container"></div>
                 </div>
             </div>
@@ -177,11 +180,12 @@ var La=Object.defineProperty;var Fa=(n,t,e)=>t in n?La(n,t,{enumerable:!0,config
         <div class="team-chat">
             <h2>チームチャット</h2>
             <ul id="comment-list"></ul>
-            <form id="chat-form" class="chat-form" data-id="${i.id}">
-                <input type="text" id="chat-input" placeholder="メッセージを入力..." required />
-                <button type="submit">送信</button>
-            </form>
         </div>
+
+        <form id="chat-form" class="comment-form" data-id="${i.id}">
+            <input type="text" id="chat-input" placeholder="メッセージを入力..." required />
+            <button type="submit">送信</button>
+        </form>
     </section>
     `;const s=document.getElementById("title");Ct(s);const o=document.getElementById("team-task-container");(await q(`/team/${n}/tasks`)).contents.forEach(u=>{const f=document.createElement("button");f.className=`task-card ${u.status}`,f.dataset.id=String(u.id);const g=new Date,p=u.due_datetime?new Date(u.due_datetime):null,m=p&&p<g;m&&f.classList.add("expired"),f.innerHTML=`
         <h3 class="task-title">${u.title} ${m&&u.status!=="done"?'<span class="task-warning">⚠</span>':""}

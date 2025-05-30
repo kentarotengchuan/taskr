@@ -17,43 +17,58 @@ export async function renderCommentList(comments: CommentData[]): Promise<void> 
     
 
     for (const comment of comments) {
-        const div = document.createElement('div');
-        div.classList.add('comment__wrapper');
+        if (comment.user.id !== 1) {
+            const div = document.createElement('div');
+            div.classList.add('comment__wrapper');
 
-        const imgDiv = document.createElement('div');
-        imgDiv.classList.add('image__wrapper');
+            const imgDiv = document.createElement('div');
+            imgDiv.classList.add('image__wrapper');
 
-        const img = document.createElement('img');
-        img.classList.add('image__comment');
-        img.src = `http://localhost:8000/storage/user_images/${user?.img_path || 'emp.png'}`;
+            const img = document.createElement('img');
+            img.classList.add('image__comment');
+            img.src = `http://localhost:8000/storage/user_images/${comment.user.img_path || 'emp.png'}`;
 
-        imgDiv.appendChild(img);
+            imgDiv.appendChild(img);
 
-        const contentDiv = document.createElement('div');
-        contentDiv.classList.add('content__wrapper');
+            const contentDiv = document.createElement('div');
+            contentDiv.classList.add('content__wrapper');
         
-        const nameSpan = document.createElement('span');
-        nameSpan.classList.add('content__name');
-        nameSpan.textContent = comment.user.name;
+            const nameSpan = document.createElement('span');
+            nameSpan.classList.add('content__name');
+            nameSpan.textContent = comment.user.name;
 
-        const contentSpan = document.createElement('span');
-        contentSpan.classList.add('content__comment');
-        contentSpan.textContent = comment.content;
+            const contentSpan = document.createElement('span');
+            contentSpan.classList.add('content__comment');
+            contentSpan.textContent = comment.content;
 
-        contentDiv.appendChild(nameSpan);
-        contentDiv.appendChild(contentSpan);
+            contentDiv.appendChild(nameSpan);
+            contentDiv.appendChild(contentSpan);
         
-        div.appendChild(imgDiv);
+            div.appendChild(imgDiv);
 
-        const isAuth: boolean = comment.user.id === authId;        
-        if (isAuth) { 
-            div.prepend(contentDiv);
-            div.classList.add('right-side');
+            const isAuth: boolean = comment.user.id === authId;
+            if (isAuth) {
+                div.prepend(contentDiv);
+                div.classList.add('right-side');
+            } else {
+                div.appendChild(contentDiv);
+                div.classList.add('left-side');
+            }
+
+            commentContainer?.appendChild(div);
         } else {
-            div.appendChild(contentDiv);
-            div.classList.add('left-side');
-        }
+            const div = document.createElement('div');
+            div.classList.add('comment__wrapper');
+            div.classList.add('admin');
 
-        commentContainer?.appendChild(div);
+            const contentSpan = document.createElement('span');
+            contentSpan.classList.add('content__comment');
+            contentSpan.classList.add('admin');
+            contentSpan.textContent = comment.content;
+
+            div.appendChild(contentSpan);
+
+            commentContainer?.appendChild(div);
+        }   
     }
 }

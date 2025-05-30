@@ -7,6 +7,7 @@ use App\Models\Task;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use App\Models\Comment;
 
 class TaskController extends Controller
 {
@@ -25,9 +26,16 @@ class TaskController extends Controller
             $task = Task::create([
                 'title' => $request->input('title'),
                 'description' => $request->input('description'),
-                'due_datetime' => Carbon::now('Asia/Tokyo'),
+                'due_datetime' => $request->date('due_datetime'),
                 'user_id' => Auth::user()->id,
                 'team_id' => (int)$request->input('team_id') == 0 ? null : (int)$request->input('team_id'),
+            ]);
+
+            Comment::create([
+                'task_id' => $task->id,
+                'team_id' => $task->team_id,
+                'user_id' => 1,
+                'content' => 'タスク『'.$task->title.'』が作成されました。',
             ]);
 
             return response()->json([
@@ -35,7 +43,7 @@ class TaskController extends Controller
                 'message' => 'task created.',
                 'contents' => $task->id,
             ]);
-        } catch (\Excepton $e) {
+        } catch (\Exception $e) {
             return response()->json([
                 'result' => 'failed',
                 'message' => $e->getMessage(),

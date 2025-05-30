@@ -14,11 +14,11 @@ class TeamUserSeeder extends Seeder
      */
     public function run(): void
     {
-        $testUser1 = User::where('id',1)->first();
-        $testUser2 = User::where('id',2)->first();
+        $testUser1 = User::where('id',2)->first();
+        $testUser2 = User::where('id',3)->first();
 
         $testUser1->teams()->attach(1, [
-            'role' => 'member',
+            'role' => 'owner',
             'created_at' => now('Asia/Tokyo'),
             'updated_at' => now('Asia/Tokyo'),
         ]);
