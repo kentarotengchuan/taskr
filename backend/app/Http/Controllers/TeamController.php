@@ -80,7 +80,7 @@ class TeamController extends Controller
     public function create(TeamRequest $request) {
         try {
             $team = Team::create([
-                'name' => $request->title,
+                'name' => $request->name,
                 'description' => $request->description,
                 'owner_id' => Auth::id(),
             ]);

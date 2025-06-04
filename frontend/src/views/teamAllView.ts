@@ -15,7 +15,10 @@ export async function renderTeamAllView(): Promise<void> {
         <header id="title">
             <h1 id="title-text">チーム一覧</h1>
         </header>
-        <p id="team-title">チーム一覧</p>
+        <div id="team-title">
+            <span>チーム一覧</span>
+            <a href="/create/team" class="create-link">チーム作成</a>
+        </div>
         <div id="team-cards" class="team-cards"></div> 
     </section>`;
 

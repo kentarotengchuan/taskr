@@ -117,7 +117,7 @@ export function setupTeamCreateEvents(): void {
         const invitedIds: number[] = Array.from(list.querySelectorAll('div')).map(el => Number(el.dataset.id));
 
         const res: TeamCreateResponse | ValidationErrorResponse = await apiPost<TeamCreateResponse>('/team', {
-            title: title,
+            name: title,
             description: description,
             ids: invitedIds,
         });
