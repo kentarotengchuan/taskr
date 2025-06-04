@@ -1,3 +1,5 @@
+import { ValidationErrorResponse } from "./types/Response";
+
 const API_BASE = 'http://localhost:8000/api';
 let csrfToken: string | null = null;
 let csrfFetchPromise: Promise<void> | null = null;
@@ -72,24 +74,36 @@ export async function apiGet(endpoint: string): Promise<any> {
     return await res.json();
 }
 
-export async function apiPost(endpoint: string, body = {}): Promise<any> {
+export async function apiPost<T = any>(endpoint: string, body = {}): Promise<T | ValidationErrorResponse> {
     const res = await fetch(API_BASE + endpoint, {
         method: 'POST',
         headers: getHeaders(),
         credentials: 'include',
         body: JSON.stringify(body),
     });
-    return await res.json();
+    const data = await res.json();
+
+    if (res.status === 422) {
+        return data as ValidationErrorResponse;
+    }
+
+    return data as T;
 }
 
-export async function apiPostForm(endpoint: string, formData: FormData): Promise<any> {
+export async function apiPostForm<T = any>(endpoint: string, formData: FormData): Promise<T | ValidationErrorResponse> {
     const res = await fetch(API_BASE + endpoint, {
         method: 'POST',
         headers: getHeaders(false),
         credentials: 'include',
         body: formData,
     });
-    return await res.json();
+    const data = await res.json();
+    
+    if (res.status === 422) {
+        return data as ValidationErrorResponse;
+    }
+
+    return data as T;
 }
 
 export async function apiDelete(endpoint: string): Promise<any> {
@@ -101,7 +115,7 @@ export async function apiDelete(endpoint: string): Promise<any> {
     return await res.json();
 }
 
-export async function apiPutForm(endpoint: string, formData: FormData): Promise<any> {
+export async function apiPutForm<T = any>(endpoint: string, formData: FormData): Promise<T | ValidationErrorResponse> {
     formData.append('_method', 'PUT');
 
     const res = await fetch(API_BASE + endpoint, {
@@ -110,5 +124,13 @@ export async function apiPutForm(endpoint: string, formData: FormData): Promise<
         credentials: 'include',
         body: formData,
     });
-    return await res.json();
+
+    const data = await res.json();
+
+    if (res.status === 422) {
+        return data as ValidationErrorResponse;
+    }
+
+    return data as T;
 }
+

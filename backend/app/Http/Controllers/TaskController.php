@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use App\Models\Comment;
+use App\Http\Requests\TaskRequest;
 
 class TaskController extends Controller
 {
@@ -20,7 +21,7 @@ class TaskController extends Controller
         return response()->json(['contents' => $tasks]);
     }
 
-    public function create(Request $request)
+    public function create(TaskRequest $request)
     {
         try {
             $task = Task::create([

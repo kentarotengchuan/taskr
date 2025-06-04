@@ -11,17 +11,17 @@ export function renderRegisterView(): void {
       <form id="register-form" class="form">
         <div class="form-group">
           <label for="register-name">ユーザー名</label>
-          <input type="string" id="register-name" required placeholder="山田太郎" />
+          <input type="string" id="register-name" name="name" placeholder="山田太郎" />
         </div>
 
         <div class="form-group">
           <label for="register-email">メールアドレス</label>
-          <input type="email" id="register-email" required placeholder="example@example.com" />
+          <input type="email" id="register-email" name="email" placeholder="example@example.com" />
         </div>
 
         <div class="form-group">
           <label for="register-password">パスワード</label>
-          <input type="password" id="register-password" required placeholder="パスワードを入力" />
+          <input type="password" id="register-password" name="password" placeholder="パスワードを入力" />
         </div>
 
         <button type="submit" id="register-submit">会員登録</button>

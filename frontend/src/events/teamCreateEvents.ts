@@ -5,7 +5,9 @@ import { renderTeamDetailView } from "../views/teamDetailView";
 import { Invite, User } from "../types/Model";
 import { renderSuggestionList } from "../views/components/renderSuggestionList";
 import { renderPendingList } from "../views/components/renderPendingList";
-import { TeamCreateResponse } from "../types/Response";
+import { TeamCreateResponse, ValidationErrorResponse } from "../types/Response";
+import { isValidationError } from "../types/guard";
+import { displayValidationErrors } from "../views/components/renderValidationMessage";
 
 let eventBound = false;
 
@@ -101,7 +103,7 @@ export function setupTeamCreateEvents(): void {
     delegate(app, '#team-create-submit-button', 'click', async (el, event) => {
         event.preventDefault();
 
-        const titleInput = document.getElementById('team-title') as HTMLInputElement;
+        const titleInput = document.getElementById('team-name') as HTMLInputElement;
         const descriptionInput = document.getElementById('team-description') as HTMLInputElement;
 
         const title = titleInput.value.trim();
@@ -114,11 +116,16 @@ export function setupTeamCreateEvents(): void {
         }
         const invitedIds: number[] = Array.from(list.querySelectorAll('div')).map(el => Number(el.dataset.id));
 
-        const res: TeamCreateResponse = await apiPost('/team', {
+        const res: TeamCreateResponse | ValidationErrorResponse = await apiPost<TeamCreateResponse>('/team', {
             title: title,
             description: description,
             ids: invitedIds,
         });
+
+        if (isValidationError(res)) {
+            displayValidationErrors(res.errors);
+            return;
+        }
 
         if (res.result == 'success') {
             console.log(res.message);

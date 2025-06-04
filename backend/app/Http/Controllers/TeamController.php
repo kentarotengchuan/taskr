@@ -7,7 +7,7 @@ use App\Models\Team;
 use App\Models\Invite;
 use Illuminate\Support\Facades\Auth;
 use App\Models\TeamUser;
-
+use App\Http\Requests\TeamRequest;
 
 class TeamController extends Controller
 {
@@ -29,7 +29,7 @@ class TeamController extends Controller
                 'message' => 'You did not joined this team.',
             ]);
         }
-        
+
         $team = Team::where('id', $teamId)->with(['owner','users','tasks', 'comments'])->first();
 
         if (!$team) {
@@ -77,7 +77,7 @@ class TeamController extends Controller
         }  
     }
 
-    public function create(Request $request) {
+    public function create(TeamRequest $request) {
         try {
             $team = Team::create([
                 'name' => $request->title,

@@ -12,12 +12,12 @@ export function renderLoginView(message?: string): void {
       <form id="login-form" class="form">
         <div class="form-group">
           <label for="login-email">メールアドレス</label>
-          <input type="email" id="login-email" required placeholder="example@example.com" />
+          <input type="email" id="login-email" name="email" placeholder="example@example.com" />
         </div>
 
         <div class="form-group">
           <label for="login-password">パスワード</label>
-          <input type="password" id="login-password" required placeholder="パスワードを入力" />
+          <input type="password" id="login-password" name="password" placeholder="パスワードを入力" />
         </div>
 
         <button type="submit" id="login-submit">ログイン</button>

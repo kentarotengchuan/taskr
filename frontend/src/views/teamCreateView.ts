@@ -26,8 +26,8 @@ export async function renderTeamCreateView(): Promise<void> {
             </button>
             <form id="team-create-form" class="form">
                 <div class="form-group">
-                    <label for="team-title">タイトル</label>
-                    <input type="text" id="team-title" name="title" required />
+                    <label for="team-name">タイトル</label>
+                    <input type="text" id="team-name" name="name" required />
                 </div>
 
                 <div class="form-group">

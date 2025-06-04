@@ -1,5 +1,8 @@
 import { delegate } from './delegate';
 import { register } from '../services/authService';
+import { RegisterResponse, ValidationErrorResponse } from '../types/Response';
+import { isValidationError } from '../types/guard';
+import { displayValidationErrors } from '../views/components/renderValidationMessage';
 
 let eventBound = false;
 
@@ -21,15 +24,21 @@ export function setupRegisterEvents(): void {
         const email = emailInput?.value.trim();
         const password = passwordInput?.value;
 
-        if (!name || !email || !password) {
-            alert('名前とメールアドレスとパスワードを入力してください');
+        const res: RegisterResponse | ValidationErrorResponse = await register(name, email, password);
+
+        if (isValidationError(res)) {
+            displayValidationErrors(res.errors);
             return;
         }
 
-        const result = await register(name, email, password);
+        if (res.result === "success") {
+            history.pushState({}, '', '/verify');
+            window.dispatchEvent(new PopStateEvent('popstate'));
+        } else {
+            alert('登録失敗');
+        }
 
-        history.pushState({}, '', '/verify');
-        window.dispatchEvent(new PopStateEvent('popstate'));
+        
     });
 
     delegate(app, '#login-link', 'click', (el, event) => {

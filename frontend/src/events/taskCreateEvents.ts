@@ -1,7 +1,9 @@
 import { delegate } from './delegate';
 import { logout } from '../services/authService';
 import { apiPostForm } from '../api';
-import { TaskCreateResponse } from '../types/Response';
+import { TaskCreateResponse, ValidationErrorResponse } from '../types/Response';
+import { isValidationError } from '../types/guard';
+import { displayValidationErrors } from '../views/components/renderValidationMessage';
 
 let eventBound = false;
 
@@ -37,7 +39,12 @@ export function setupTaskCreateEvents(): void {
         if (!form) return;
         const formData = new FormData(form);
 
-        const res: TaskCreateResponse = await apiPostForm('/task', formData);
+        const res: TaskCreateResponse | ValidationErrorResponse = await apiPostForm<TaskCreateResponse>('/task', formData);
+
+        if (isValidationError(res)) {
+            displayValidationErrors(res.errors);
+            return;
+        }
 
         if (res.result === 'success') {
             console.log(res.message);
