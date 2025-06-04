@@ -13,9 +13,7 @@ export function setupProfileEvents(): void {
 
     delegate(app, '#back-to-dashboard', 'click', async (el, event) => {
         event.preventDefault();
-
-        history.pushState({}, '', '/mypage');
-        window.dispatchEvent(new PopStateEvent('popstate'));
+        history.back();
     });
 
     delegate(app, '#logout-button', 'click', async (el, event) => {

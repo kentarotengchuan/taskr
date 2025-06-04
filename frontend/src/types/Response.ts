@@ -35,7 +35,7 @@ export type TeamResponse = {
     contents: Team[];
 }
 
-export type DetailResponse = {
+export type TaskDetailResponse = {
     result: 'success' | 'failed';
     message: string;
     contents?: Task;
@@ -78,4 +78,10 @@ export type TeamCreateResponse = {
     result: 'success' | 'failed';
     message: string;
     contents: Team;
+}
+
+export type TeamDetailResponse = {
+    result: 'success' | 'failed';
+    message: string;
+    contents?: Team;
 }

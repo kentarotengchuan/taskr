@@ -1,5 +1,5 @@
 import { apiGet } from "../api";
-import { CommentResponse, DetailResponse } from "../types/Response";
+import { CommentResponse, TaskDetailResponse } from "../types/Response";
 import { setUpSideBarView } from "./sideBarView";
 import { CommentData, Task } from "../types/Model";
 import { comment } from "postcss";
@@ -12,10 +12,16 @@ export async function renderTaskDetailView(id: number): Promise<void> {
         return;
     }
 
-    const result: DetailResponse = await apiGet(`/task/${id}`);
+    const result: TaskDetailResponse = await apiGet(`/task/${id}`);
 
     if (!result.contents) {
         console.error(`Error:${result.message}`);
+        app.innerHTML = `
+            <section id="not-found">
+                <h1>${result.message}</h1>
+                <a href="/dashboard">ダッシュボード画面へ</a>
+            </section>
+        `;
         return;
     }
 

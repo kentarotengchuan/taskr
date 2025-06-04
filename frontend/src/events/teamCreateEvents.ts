@@ -18,9 +18,7 @@ export function setupTeamCreateEvents(): void {
 
     delegate(app, '#back-to-dashboard', 'click', async (el, event) => {
         event.preventDefault();
-
-        history.pushState({}, '', '/dashboard');
-        window.dispatchEvent(new PopStateEvent('popstate'));
+        history.back();
     });
 
     delegate(app, '#logout-button', 'click', async (el, event) => {
@@ -46,8 +44,6 @@ export function setupTeamCreateEvents(): void {
 
     delegate(app, '.invite-button', 'click', async (el, event) => {
         event.preventDefault();
-
-        
 
         const list: HTMLElement | null = document.getElementById('team-pending-list');
         if (!list) {

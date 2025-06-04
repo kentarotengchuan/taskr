@@ -53,6 +53,14 @@ class TaskController extends Controller
 
     public function show(Request $request, int $taskId)
     {
+        $user = Auth::user();
+        if (!$user || !$user->tasks->contains('id', $taskId)) {
+            return response()->json([
+                'result' => 'failed',
+                'message' => 'You did not joined this task.',
+            ]);
+        }
+
         $task = Task::where('id', "$taskId")->with(['user','team','comments'])->first();
 
         if (!$task) {

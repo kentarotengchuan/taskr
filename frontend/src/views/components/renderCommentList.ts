@@ -18,6 +18,15 @@ export async function renderCommentList(comments: CommentData[]): Promise<void> 
 
     for (const comment of comments) {
         if (comment.user.id !== 1) {
+            const datetimeSpan = document.createElement('span');
+            datetimeSpan.textContent = formatDateTime(comment.created_at);
+            if (comment.user.id === user?.id) {
+                datetimeSpan.classList.add('comment-datetime__content');
+            } else {
+                datetimeSpan.classList.add('comment-datetime__content--notAuthor');
+            }
+            commentContainer?.appendChild(datetimeSpan);
+
             const div = document.createElement('div');
             div.classList.add('comment__wrapper');
 
@@ -71,4 +80,14 @@ export async function renderCommentList(comments: CommentData[]): Promise<void> 
             commentContainer?.appendChild(div);
         }   
     }
+}
+
+function formatDateTime(datetimeString: string): string {
+    const date = new Date(datetimeString);
+    const yyyy = date.getFullYear();
+    const mm = String(date.getMonth() + 1).padStart(2, '0');
+    const dd = String(date.getDate()).padStart(2, '0');
+    const hh = String(date.getHours()).padStart(2, '0');
+    const mi = String(date.getMinutes()).padStart(2, '0');
+    return `${yyyy}/${mm}/${dd} ${hh}:${mi}`;
 }

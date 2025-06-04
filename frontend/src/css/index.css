@@ -8,6 +8,7 @@
 @import './components/teamCard.css';
 @import './components/userImage.css';
 @import './components/commentList.css';
+@import './components/inviteForm.css';
 
 @import './views/loginView.css';
 @import './views/registerView.css';

@@ -22,6 +22,14 @@ class TeamController extends Controller
 
     public function show(Request $request, int $teamId)
     {
+        $user = Auth::user();
+        if (!$user || !$user->teams->contains('id', $teamId)) {
+            return response()->json([
+                'result' => 'failed',
+                'message' => 'You did not joined this team.',
+            ]);
+        }
+        
         $team = Team::where('id', $teamId)->with(['owner','users','tasks', 'comments'])->first();
 
         if (!$team) {

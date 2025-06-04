@@ -18,6 +18,7 @@ export type Team = {
         id: number;
         name: string;
     };
+    users?: User[];
 };
 
 export type Task = {
@@ -37,6 +38,7 @@ export type Task = {
 export type CommentData = {
     id: number;
     content: string;
+    created_at: string;
     user: User;
     task?: Task;
 }

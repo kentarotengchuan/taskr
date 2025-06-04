@@ -17,9 +17,7 @@ export function setupTaskDetailEvents(): void {
 
     delegate(app, '#back-to-dashboard', 'click', async (el, event) => {
         event.preventDefault();
-
-        history.pushState({}, '', '/dashboard');
-        window.dispatchEvent(new PopStateEvent('popstate'));
+        history.back();
     });
 
     delegate(app, '#logout-button', 'click', async (el, event) => {

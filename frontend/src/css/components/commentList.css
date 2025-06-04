@@ -12,6 +12,26 @@
     scroll-behavior: smooth;
 }
 
+.comment-datetime__content {
+    font-size: 0.75rem;
+    color: #888;
+    align-self: flex-end;
+    margin-top: -0.25rem;
+    margin-bottom: 0.25rem;
+    margin-left: auto;
+    margin-right: 0.5rem;
+}
+
+.comment-datetime__content--notAuthor {
+    font-size: 0.75rem;
+    color: #888;
+    align-self: flex-start;
+    margin-top: -0.25rem;
+    margin-bottom: 0.25rem;
+    margin-left: 0.5rem;
+    margin-right: auto;
+}
+
 .comment__wrapper {
     display: flex;
     max-width: 80%;

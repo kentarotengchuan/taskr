@@ -1,6 +1,6 @@
 import { apiGet } from "../api";
-import { CommentData, Task, User } from "../types/Model";
-import { CommentResponse } from "../types/Response";
+import { CommentData, Task, Team, User } from "../types/Model";
+import { CommentResponse, TeamDetailResponse, TeamResponse } from "../types/Response";
 import { renderCommentList } from "./components/renderCommentList";
 import { renderPendingList } from "./components/renderPendingList";
 import { setUpSideBarView } from "./sideBarView";
@@ -12,8 +12,18 @@ export async function renderTeamDetailView(id: number): Promise<void> {
         return;
     }
 
-    const teamRes = await apiGet(`/team/${id}`);
-    const team = teamRes.contents;
+    const teamRes: TeamDetailResponse = await apiGet(`/team/${id}`);
+    if (!teamRes.contents) {
+        console.error(`Error:${teamRes.message}`);
+        app.innerHTML = `
+            <section id="not-found">
+                <h1>${teamRes.message}</h1>
+                <a href="/dashboard">ダッシュボード画面へ</a>
+            </section>
+        `;
+        return;
+    }
+    const team: Team = teamRes.contents;
 
     app.innerHTML = `
     <section id="team-detail-view" class="view">
@@ -33,7 +43,7 @@ export async function renderTeamDetailView(id: number): Promise<void> {
                     <h2>チーム情報</h2>
                     <p><strong>説明:</strong> ${team.description ?? '（なし）'}</p>
                     <p><strong>オーナー:</strong> ${team.owner?.name ?? '不明'}</p>
-                    <p><strong>メンバー:</strong> ${team.users.map((m: User) => m.name).join(', ')}</p>
+                    <p><strong>メンバー:</strong> ${team.users?.map((m: User) => m.name).join(', ')}</p>
                 </div>
             </div>
 
@@ -56,7 +66,7 @@ export async function renderTeamDetailView(id: number): Promise<void> {
             <ul id="team-pending-list"></ul>
 
             <h2>ユーザー招待</h2>
-            <form id="invite-form" class="invite-form" data-id="${team.id}">
+            <form id="invite-form" data-id="${team.id}">
                 <input type="text" id="invite-input" placeholder="ユーザー名で検索" required />
                 <ul id="invite-suggestions" class="invite-suggestions"></ul>
             </form>
@@ -104,7 +114,7 @@ export async function renderTeamDetailView(id: number): Promise<void> {
     });
 
     const membersList = document.getElementById('team-members-list');
-    team.users.forEach((user: User) => {
+    team.users?.forEach((user: User) => {
         const li = document.createElement('li');
         li.textContent = user.name;
         membersList?.appendChild(li);
